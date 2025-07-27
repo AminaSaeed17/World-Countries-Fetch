@@ -9,11 +9,11 @@ if (localStorage.getItem("theme") === "dark") {
 
 back.addEventListener("click", function (e) {
   e.preventDefault();
-  document.location.href = "../index.html";
+  document.location.href = "./index.html";
 });
 
 async function getData() {
-  let response = await fetch("../data.json");
+  let response = await fetch("./data.json");
   console.log(response);
   if (response.ok) {
     data = await response.json();

@@ -8,7 +8,7 @@ if (localStorage.getItem("theme") === "dark") {
 }
 
 async function getData() {
-  let response = await fetch("../data.json");
+  let response = await fetch("./data.json");
   console.log(response);
   if (response.ok) {
     data = await response.json();
