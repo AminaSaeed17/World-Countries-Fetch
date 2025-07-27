@@ -84,10 +84,6 @@ selectRegion.addEventListener("change", async function (e) {
   let valuee = this.value;
   console.log(valuee);
   filterbyRegion(valuee);
-  // let filteredCountries = data.filter(
-  //   (item) => item.region === selectRegion
-  // );
-  // console.log(filteredCountries);
 });
 
 async function filterbyRegion(value) {

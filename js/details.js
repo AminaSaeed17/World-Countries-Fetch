@@ -73,11 +73,11 @@ mode.addEventListener("click", function () {
   localStorage.setItem("theme", isDark ? "dark" : "light");
 
   if (document.body.classList.contains("dark-mode")) {
-    modeText.textContent = "Light Mode";
+    // modeText.textContent = "Light Mode";
     modeIcon.classList.remove("fa-moon");
     modeIcon.classList.add("fa-sun");
   } else {
-    modeText.textContent = "Dark Mode";
+    // modeText.textContent = "Dark Mode";
     modeIcon.classList.remove("fa-sun");
     modeIcon.classList.add("fa-moon");
   }
