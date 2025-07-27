@@ -1,6 +1,7 @@
 let selectRegion = document.getElementById("selectRegion");
 let inputSearch = document.getElementById("inputSearch");
 let mode = document.getElementById("mode");
+let scrollIcon = document.querySelector(".scroll")
 let data;
 
 if (localStorage.getItem("theme") === "dark") {
@@ -9,10 +10,8 @@ if (localStorage.getItem("theme") === "dark") {
 
 async function getData() {
   let response = await fetch("./data.json");
-  console.log(response);
   if (response.ok) {
     data = await response.json();
-    console.log(data);
     displayData(data);
     filterRegion(data);
   }
@@ -44,7 +43,9 @@ function displayData(data) {
                             <p class="card-text text-li m-0">Capital: ${
                               data[i].capital
                             }</p>
-                            <a onclick="storeDetails(${i})" href="details.html" class="text-decoration-none">More Details...</a>
+                            <a onclick="storeDetails('${
+                              data[i].name
+                            }')" href="details.html" class="text-decoration-none">More Details...</a>
                         </div>
                     </div>
                     
@@ -56,8 +57,8 @@ function displayData(data) {
   document.getElementById("rowData").innerHTML = cartona;
 }
 
-function storeDetails(index) {
-  localStorage.setItem("countryIndex", index); 
+function storeDetails(country) {
+  localStorage.setItem("country", country); 
 }
 
 
@@ -84,7 +85,6 @@ function filterRegion(data) {
 selectRegion.addEventListener("change", async function (e) {
   e.preventDefault();
   let valuee = this.value;
-  console.log(valuee);
   filterbyRegion(valuee);
 });
 
@@ -114,22 +114,18 @@ mode.addEventListener("click", function (e) {
   const isDark = document.body.classList.contains("dark-mode");
 
   localStorage.setItem("theme", isDark ? "dark" : "light");
-
-  if (document.body.classList.contains("dark-mode")) {
-    modeText.textContent = "Light Mode";
-    modeIcon.classList.remove("fa-moon");
-    modeIcon.classList.add("fa-sun");
-  } else {
-    modeText.textContent = "Dark Mode";
-    modeIcon.classList.remove("fa-sun");
-    modeIcon.classList.add("fa-moon");
-  }
 });
 
+window.addEventListener('scroll', function () {
+  if (window.scrollY >= 500) scrollIcon.classList.remove("d-none");
+  else scrollIcon.classList.add("d-none");
+})
 
-
-
-
-
+scrollIcon.addEventListener('click', function () {
+  window.scrollTo({
+    top: 0,
+    behaviour: 'smooth',
+  })
+})
 
 getData();
