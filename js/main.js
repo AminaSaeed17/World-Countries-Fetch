@@ -87,7 +87,7 @@ selectRegion.addEventListener("change", async function (e) {
 });
 
 async function filterbyRegion(value) {
-  let response = await fetch("../data.json");
+  let response = await fetch("./data.json");
   console.log(response);
   if (response.ok) {
     data = await response.json();
