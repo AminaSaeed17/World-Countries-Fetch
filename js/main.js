@@ -19,6 +19,8 @@ async function getData() {
 }
 
 function displayData(data) {
+  let searchTerm = inputSearch.value;
+  let regex = new RegExp(searchTerm, "ig");
   let cartona = "";
   for (let i = 0; i < data.length; i++) {
     if (data[i].name.toLowerCase().includes(inputSearch.value.toLowerCase())) {
@@ -30,7 +32,7 @@ function displayData(data) {
                         }" alt="Title" />
                         <div class="card-body">
                             <h4 class="card-title">${data[i].name.replace(
-                              inputSearch.value.toLowerCase(),
+                              regex,
                               (match) => `<span class="bg-info">${match}</span>`
                             )}</h4>
                             <p class="card-text text-li m-0">Population: ${
@@ -86,20 +88,14 @@ selectRegion.addEventListener("change", async function (e) {
   filterbyRegion(valuee);
 });
 
-async function filterbyRegion(value) {
-  let response = await fetch("./data.json");
-  console.log(response);
-  if (response.ok) {
-    data = await response.json();
-    console.log(data);
-    let dataRegion = [];
-    for (let i = 0; i < data.length; i++) {
-      if (data[i].region === value) {
-        dataRegion.push(data[i]);
-      }
+function filterbyRegion(value) {
+  let dataRegion = [];
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].region === value) {
+      dataRegion.push(data[i]);
     }
-    displayData(dataRegion);
   }
+  displayData(dataRegion);
 }
 
 const savedTheme = localStorage.getItem("theme");
